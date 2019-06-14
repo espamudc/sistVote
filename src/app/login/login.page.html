@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <img alt="logo" style="width:50%" src="../../assets/img/logo.png" > 
+    </ion-card-header>
+  
+    <ion-card-content>        
+       
+        <ion-item>
+            <ion-input placeholder="Identificación" [(ngModel)]="objLogin.identificacion" [ngModelOptions]="{standalone: true}"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-input placeholder="Contraseña" [(ngModel)]="objLogin.contrasena" [ngModelOptions]="{standalone: true}"></ion-input>
+          </ion-item>
+            <ion-button (click)="postLoginFormulario();"  expand="full">Ingresar</ion-button>
+            <ion-button routerLink="/register"  expand="full">¿Eres nuevo? Regístrate</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
