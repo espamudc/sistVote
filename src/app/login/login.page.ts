@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
   postLoginFormulario()
   {
     var _objLogin = this.objLogin;
-    this.loginService.postLogin(_objLogin)
+    this.loginService.postLogin(_objLogin.identificacion,_objLogin.contrasena)
     .then(data =>{
       console.log(data);
     });
