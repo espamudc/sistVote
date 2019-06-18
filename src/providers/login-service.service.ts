@@ -19,7 +19,6 @@ export class LoginService {
       .set('identificacion', identificacion)
       .set('contrasena', contrasena);
 
-      console.log(body);
        return new Promise((resolve, reject) => {
         this.http.post(url+'Login/Login',body.toString(),
           { 

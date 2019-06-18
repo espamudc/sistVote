@@ -1,24 +1,29 @@
 <ion-header>
-  <ion-toolbar>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <img alt="logo" style="margin:0 auto 0 auto; text-align:center;width:50%" src="../../assets/img/logo.png" > 
-    </ion-card-header>
+
   
-    <ion-card-content>        
-       
-        <ion-item>
-            <ion-input placeholder="Identificación" [(ngModel)]="objLogin.identificacion" [ngModelOptions]="{standalone: true}"></ion-input>
-          </ion-item>
+  <ion-row justify-content-center align-items-center style="height: 100%">
+   
+    <ion-card>
+      <ion-card-header>
+        <img alt="logo" style="margin:0 auto 0 auto; text-align:center;width:50%" src="../../assets/img/logo.png" > 
+      </ion-card-header>
+    
+      <ion-card-content> 
+          <ion-chip *ngIf="!_validar" color="danger">
+              <ion-icon name="close"></ion-icon><ion-label  color="danger" >{{_mensaje}}</ion-label>
+          </ion-chip>
           <ion-item>
-              <ion-input placeholder="Contraseña" [(ngModel)]="objLogin.contrasena" [ngModelOptions]="{standalone: true}" type="password"></ion-input>
-          </ion-item>
-            <ion-button (click)="postLoginFormulario();"  expand="full">Ingresar</ion-button>
-            <ion-button routerLink="/register"  expand="full">¿Eres nuevo? Regístrate</ion-button>
-    </ion-card-content>
-  </ion-card>
+              <ion-input autofocus placeholder="Identificación" value="131165593" [(ngModel)]="objLogin.identificacion" [ngModelOptions]="{standalone: true}"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input  placeholder="Contraseña" value="Espam" [(ngModel)]="objLogin.contrasena" [ngModelOptions]="{standalone: true}" type="password"></ion-input>
+            </ion-item>
+              <ion-button (click)="postLoginFormulario();"  expand="full">Ingresar</ion-button>
+              <ion-button routerLink="/register"  expand="full">¿Eres nuevo? Regístrate</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
 </ion-content>

@@ -11,8 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { LoginService } from '../providers/login-service.service';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { IonicStorageModule } from '@ionic/storage';
+import { ModalLoginPageModule } from '../app/modal-login/modal-login.module';
 
 enableProdMode();
 
@@ -23,7 +23,9 @@ enableProdMode();
     HttpClientModule,
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    IonicStorageModule.forRoot(),
+    AppRoutingModule,
+    ModalLoginPageModule
   ],
   providers: [
     LoginService,
