@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IonicModule, NavParams, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-voter',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalVoterPage implements OnInit {
 
-  constructor() { }
+ public _codigoEvento : string ="";
+
+  constructor(
+    private navparams: NavParams,
+    private modalController:ModalController
+  ) { }
 
   ngOnInit() {
+    var _codigoEvento = this._codigoEvento;
   }
 
 }

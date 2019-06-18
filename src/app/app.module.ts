@@ -13,6 +13,7 @@ import { LoginService } from '../providers/login-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { ModalLoginPageModule } from '../app/modal-login/modal-login.module';
+import { ModalVoterPageModule } from '../app/modal-voter/modal-voter.module';
 
 enableProdMode();
 
@@ -25,7 +26,8 @@ enableProdMode();
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
-    ModalLoginPageModule
+    ModalLoginPageModule,
+    ModalVoterPageModule
   ],
   providers: [
     LoginService,

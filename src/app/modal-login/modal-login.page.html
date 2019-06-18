@@ -10,11 +10,11 @@
       <ion-icon name="key" slot="start"></ion-icon>
       <ion-label>{{tipoUsuario._descripcionTipoUsuario}}</ion-label>
     </ion-item>
-    <ion-item *ngIf="tipoUsuario._identificadorTipoUsuario==2" href="#" class="card-login">
+    <ion-item *ngIf="tipoUsuario._identificadorTipoUsuario==2" href="#"  class="card-login">
       <ion-icon name="cube" slot="start"></ion-icon>
       <ion-label>{{tipoUsuario._descripcionTipoUsuario}}</ion-label>
     </ion-item>
-    <ion-item *ngIf="tipoUsuario._identificadorTipoUsuario==3" href="#" class="card-login" >
+    <ion-item *ngIf="tipoUsuario._identificadorTipoUsuario==3" (click)="cargarModalIngresoVotos();" class="card-login" >
       <ion-icon name="thumbs-up" slot="start"></ion-icon>
       <ion-label>{{tipoUsuario._descripcionTipoUsuario}}</ion-label>
     </ion-item>
