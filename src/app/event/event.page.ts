@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Storage} from '@ionic/storage';
+import { EventService } from '../../providers/event-service.service';
 
 @Component({
   selector: 'app-event',
@@ -8,12 +10,41 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EventPage implements OnInit {
 
-  public _evento  = null;
+  public _objetoEvento : any [];
+  public _objetoConfigurarActorEvaluador : any [];
+  public _validar: boolean = true;
+  public _mensaje: string ="";
+
   constructor(
-    private activateRoute: ActivatedRoute
+    private route: ActivatedRoute,
+    private storage: Storage,
+    private eventService: EventService
   ) { }
 
   ngOnInit() {
+    this.mostrarEvento(this.route.snapshot.paramMap.get('codigoEvento')); 
   }
 
+  mostrarEvento(_codigoEvento : string)
+  {
+      this.storage.get('idAsignarTipoUsuario').then((val) => 
+      {
+        this.eventService.getEvent(val, _codigoEvento)
+        .then(data => {
+          this._validar=data._validar;
+          this._mensaje = data._mensaje;
+          if(data._validar==true)
+          {
+            this._objetoEvento = data._objeto;
+            this._objetoConfigurarActorEvaluador = data._objeto[0]._objetoConfigurarActorEvaluador;
+          }
+        });
+      });  
+  }
+
+
+  cargarStandsPorEvento(_idConfigurarEventoEncriptado : string)
+  {
+    
+  }
 }

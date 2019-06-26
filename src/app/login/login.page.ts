@@ -33,15 +33,6 @@ public _validar : boolean = true;
   }
 
 
-  // async cargarModal (data: any)
-  // {
-  //     const modal = await this.modalController.create({
-  //       component: ModalLoginPage,
-  //       componentProps: { tipoUsuario: data }
-  //     });
-  //     return await modal.present();
-  // }
-
   
   postLoginFormulario()
   {

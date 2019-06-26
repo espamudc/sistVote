@@ -1,0 +1,7 @@
+.votante {
+    text-transform: lowercase;
+    }
+
+.votante::first-letter {
+        text-transform: capitalize;
+    }

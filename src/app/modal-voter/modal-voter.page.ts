@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule, NavParams, ModalController, NavController } from '@ionic/angular';
 import { EventService } from '../../providers/event-service.service';
 import { Storage } from '@ionic/storage';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-voter',
@@ -13,15 +12,14 @@ export class ModalVoterPage implements OnInit {
 
   public _codigoEvento : string ="";
   public _validar: boolean = true;
-  public _mensaje : string = "";
-  
+  public _mensaje : string ="";
+
   constructor(
     private navparams: NavParams,
     private modalController:ModalController,
     public eventService:EventService,
     private storage: Storage,
-    private navController: NavController,
-    private router:Router
+    private navController: NavController
   ) { }
 
   ngOnInit() {
@@ -39,16 +37,16 @@ export class ModalVoterPage implements OnInit {
         this._mensaje = data._mensaje;
         if(data._validar==true)
         {
-          this.enviarEvento(data._objeto);
+          this.enviarEvento(_codigoEvento);
         }
       });
     });    
   }
 
  
-  enviarEvento(data : any)
+  enviarEvento(_codigoEvento)
   { 
-    this.navController.navigateForward('/event'); 
+    this.navController.navigateForward(`event/${_codigoEvento}`); 
     this.modalController.dismiss();
   }
 
