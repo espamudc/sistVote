@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
 import { LoginService } from '../../providers/login-service.service';
 import { Storage } from '@ionic/storage';
-import { ModalLoginPage } from '../modal-login/modal-login.page';
-
- 
 
 @Component({
   selector: 'app-login',
@@ -14,9 +11,9 @@ import { ModalLoginPage } from '../modal-login/modal-login.page';
 })
 export class LoginPage implements OnInit {
 
-_tiposUsuarios : any = [];
-_mensaje : string = "";
-_validar : boolean = true;
+public _tiposUsuarios : any = [];
+public _mensaje : string = "";
+public _validar : boolean = true;
 
   constructor(    
     public navCtrl: NavController,
@@ -36,29 +33,31 @@ _validar : boolean = true;
   }
 
 
-  async cargarModal (data: any)
-  {
-      const modal = await this.modalController.create({
-        component: ModalLoginPage,
-        componentProps: { tipoUsuario: data }
-      });
-      return await modal.present();
-  }
+  // async cargarModal (data: any)
+  // {
+  //     const modal = await this.modalController.create({
+  //       component: ModalLoginPage,
+  //       componentProps: { tipoUsuario: data }
+  //     });
+  //     return await modal.present();
+  // }
 
   
   postLoginFormulario()
   {
     var _objLogin = this.objLogin;
+
     this.loginService.postLogin(_objLogin.identificacion,_objLogin.contrasena)
-    .then(data =>{
+    .then(data =>
+      {
        if(data._validar==true){
         this._tiposUsuarios = data._objeto[0]._objetoAsignarTipoUsuario;
-
-        this.cargarModal(this._tiposUsuarios);
+        this.storage.set('idTiposUsuarios', this._tiposUsuarios);
+        this.navCtrl.navigateForward(['/options/']);
        }       
         this._validar = data._validar;
         this._mensaje=data._mensaje;   
-    });
+      });
   } 
 
 

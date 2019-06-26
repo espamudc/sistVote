@@ -1,9 +1,7 @@
 <ion-header>
 </ion-header>
 
-<ion-content>
-
-  
+<ion-content>  
   <ion-row justify-content-center align-items-center style="height: 100%">
    
     <ion-card>
@@ -15,11 +13,11 @@
           <ion-chip *ngIf="!_validar" color="danger">
               <ion-icon name="close"></ion-icon><ion-label  color="danger" >{{_mensaje}}</ion-label>
           </ion-chip>
-          <ion-item>
-              <ion-input autofocus placeholder="Identificación" value="131165593" [(ngModel)]="objLogin.identificacion" [ngModelOptions]="{standalone: true}"></ion-input>
+          <ion-item >
+              <ion-input autofocus placeholder="Identificación" value="131165593" [(ngModel)]="objLogin.identificacion" [ngModelOptions]="{standalone: true}" required></ion-input>
             </ion-item>
-            <ion-item>
-                <ion-input  placeholder="Contraseña" value="Espam" [(ngModel)]="objLogin.contrasena" [ngModelOptions]="{standalone: true}" type="password"></ion-input>
+            <ion-item >
+                <ion-input   placeholder="Contraseña" value="Espam" [(ngModel)]="objLogin.contrasena" [ngModelOptions]="{standalone: true}" type="password" required></ion-input>
             </ion-item>
               <ion-button (click)="postLoginFormulario();"  expand="full">Ingresar</ion-button>
               <ion-button routerLink="/register"  expand="full">¿Eres nuevo? Regístrate</ion-button>

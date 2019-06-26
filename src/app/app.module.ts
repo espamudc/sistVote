@@ -10,10 +10,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { LoginService } from '../providers/login-service.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule  } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
-import { ModalLoginPageModule } from '../app/modal-login/modal-login.module';
-import { ModalVoterPageModule } from '../app/modal-voter/modal-voter.module';
+import { ModalVoterPageModule } from './modal-voter/modal-voter.module';
+
+
 
 enableProdMode();
 
@@ -26,7 +27,6 @@ enableProdMode();
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
-    ModalLoginPageModule,
     ModalVoterPageModule
   ],
   providers: [
