@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Storage} from '@ionic/storage';
+import { NavController } from '@ionic/angular';
 import { EventService } from '../../providers/event-service.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class EventPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private storage: Storage,
-    private eventService: EventService
+    private eventService: EventService,
+    private navCtrl : NavController
   ) { }
 
   ngOnInit() {
@@ -31,12 +33,12 @@ export class EventPage implements OnInit {
       {
         this.eventService.getEvent(val, _codigoEvento)
         .then(data => {
-          this._validar=data._validar;
-          this._mensaje = data._mensaje;
-          if(data._validar==true)
+          this._validar=data['_validar'];
+          this._mensaje = data['_mensaje'];
+          if(data['_validar']==true)
           {
-            this._objetoEvento = data._objeto;
-            this._objetoConfigurarActorEvaluador = data._objeto[0]._objetoConfigurarActorEvaluador;
+            this._objetoEvento = data['_objeto'];
+            this._objetoConfigurarActorEvaluador = data['_objeto'][0]._objetoConfigurarActorEvaluador;
           }
         });
       });  
@@ -45,6 +47,7 @@ export class EventPage implements OnInit {
 
   cargarStandsPorEvento(_idConfigurarEventoEncriptado : string)
   {
-    
+    this.storage.set('idConfigurarEventoEncriptado', _idConfigurarEventoEncriptado);
+    this.navCtrl.navigateForward('/stands');
   }
 }

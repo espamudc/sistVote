@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'event/:codigoEvento', loadChildren: './event/event.module#EventPageModule' },
-  { path: 'options', loadChildren: './options/options.module#OptionsPageModule' },  { path: 'stands', loadChildren: './stands/stands.module#StandsPageModule' }
+  { path: 'options', loadChildren: './options/options.module#OptionsPageModule' },
+  { path: 'stands', loadChildren: './stands/stands.module#StandsPageModule' }
 
 
 

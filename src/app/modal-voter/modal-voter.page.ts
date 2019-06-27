@@ -31,11 +31,10 @@ export class ModalVoterPage implements OnInit {
     var _codigoEvento = this._codigoEvento;
     this.storage.get('idAsignarTipoUsuario').then((val) => 
     {
-      this.eventService.getEvent(val, _codigoEvento)
-      .then(data => {
-        this._validar=data._validar;
-        this._mensaje = data._mensaje;
-        if(data._validar==true)
+      this.eventService.getEvent(val, _codigoEvento).then(data => {
+        this._validar=data['_validar'];
+        this._mensaje = data['_mensaje'];
+        if(data['_validar']==true)
         {
           this.enviarEvento(_codigoEvento);
         }

@@ -5,17 +5,16 @@ import { url } from '../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class EventService {
+export class StandService {
 
   constructor(
     private http: HttpClient
   ) { }
 
 
-  
-  getEvent(idAsignarTipoUsuarioEncriptado: any, codigoevento: any)
+  getStands(idAsignarTipoUsuarioEncriptado: string, idConfigurarEventoEncriptado: string)
   {
-    const urlApi = url+`ConfigurarEvento/Filtrarconfigurareventoporcodigoevento?idAsignarTipoUsuarioEncriptado=${idAsignarTipoUsuarioEncriptado}&codigoevento=${codigoevento}`;
+    const urlApi = url+`AsignarTipoActorEvaluado/Filtrarasignartipoactorevaluadoporevento?idAsignarTipoUsuarioEncriptado=${idAsignarTipoUsuarioEncriptado}&idConfigurarEventoEncriptado=${idConfigurarEventoEncriptado}`;
     return new Promise(resolve => {
       this.http.get(urlApi).subscribe(data => {
         resolve(data);
@@ -24,4 +23,6 @@ export class EventService {
       });
     });
   }
+
+
 }
