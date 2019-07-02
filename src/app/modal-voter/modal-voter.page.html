@@ -1,19 +1,6 @@
 <ion-header>
-    <ion-searchbar color="danger" placeholder="Filter Schedules" animated></ion-searchbar>
+   <ion-searchbar (keyup.enter)="buscarEvento();"  (ionCancel)="regresarOpciones()" color="secondary" showCancelButton="always" [(ngModel)]="_codigoEvento" placeholder="Código del evento" [ngModelOptions]="{standalone: true}" animated></ion-searchbar> 
 </ion-header>
 
 <ion-content>
-  <ion-card>
-      <ion-card-content>   
-      <ion-item>
-        <ion-input autofocus [(ngModel)]="_codigoEvento" placeholder="Código del evento" [ngModelOptions]="{standalone: true}" type="search"></ion-input>
-       <ion-button  (click)="buscarEvento();">
-          <ion-icon name="search"></ion-icon>
-        </ion-button>     
-      </ion-item>
-    </ion-card-content>
-  </ion-card>  
-  <ion-card *ngIf="!_validar" color="danger">
-      <ion-icon name="close"></ion-icon><ion-label >{{_mensaje}}</ion-label>
-  </ion-card>
 </ion-content>

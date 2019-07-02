@@ -1,0 +1,24 @@
+<ion-header>   
+    <ion-toolbar>
+        <ion-buttons slot="start">
+        <ion-back-button defaultHref="event/{{_codigoEvento}}"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            Participantes
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngFor="let participante of _participantes" color="light">
+        <ion-card-header>            
+            <img src="{{_urlContent}}{{participante._rutaFotoConfigurarTipoActorEvaluado}}"/>
+            <ion-card-subtitle>{{participante._descripcionTipoActorEvaluado }} {{participante._numeroActorEvaluado}}</ion-card-subtitle>
+            <ion-card-title class="texto-card">{{participante._actorEvaluado}}</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+            <ion-text>{{participante._descripcionActorEvaluado}}</ion-text>           
+        </ion-card-content>
+      </ion-card>
+</ion-content>

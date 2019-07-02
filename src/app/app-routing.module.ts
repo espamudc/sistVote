@@ -19,7 +19,9 @@ const routes: Routes = [
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'event/:codigoEvento', loadChildren: './event/event.module#EventPageModule' },
   { path: 'options', loadChildren: './options/options.module#OptionsPageModule' },
-  { path: 'stands', loadChildren: './stands/stands.module#StandsPageModule' }
+  { path: 'search-event', loadChildren: './search-event/search-event.module#SearchEventPageModule' },
+  { path: 'participants/:codigoEvento', loadChildren: './participants/participants.module#ParticipantsPageModule' }
+
 
 
 

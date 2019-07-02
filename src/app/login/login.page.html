@@ -12,18 +12,18 @@
 
         <ion-item>
               <ion-label position="floating">Identificación</ion-label>
-              <ion-input type="text" [(ngModel)]="objLogin.identificacion" [ngModelOptions]="{standalone: true}" required></ion-input>
+              <ion-input type="text" value="131165593" [(ngModel)]="objLogin.identificacion" [ngModelOptions]="{standalone: true}" required></ion-input>
         </ion-item>
         <ion-item>
                 <ion-label position="floating">Contraseña</ion-label>
-                <ion-input type="text" [(ngModel)]="objLogin.contrasena" [ngModelOptions]="{standalone: true}" type="password" required></ion-input>
+                <ion-input type="text" value="Espam" [(ngModel)]="objLogin.contrasena" [ngModelOptions]="{standalone: true}" type="password" required></ion-input>
         </ion-item>
 
-        <ion-button (click)="postLoginFormulario();"  expand="full" color="secondary"><b>Ingresar</b></ion-button>
+        <ion-button (click)="postLoginFormulario();"  expand="full" color="light"><ion-icon name="log-in" slot="end"></ion-icon>Ingresar</ion-button>
               
         <ion-grid>
           <ion-row >
-            <ion-col size="2">
+            <ion-col size="1">
             </ion-col>
             <ion-col>
                   <ion-label  >¿Eres nuevo?</ion-label>
@@ -31,7 +31,7 @@
             <ion-col>
                   <a type="button" routerLink="/register" fill="outline" size="small" >Regístrate</a>
             </ion-col>
-              <ion-col size="2">
+              <ion-col size="1">
             </ion-col>
           </ion-row>
         </ion-grid>

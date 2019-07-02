@@ -15,6 +15,7 @@ export class EventPage implements OnInit {
   public _objetoConfigurarActorEvaluador : any [];
   public _validar: boolean = true;
   public _mensaje: string ="";
+  public _codigoEvento: string ="";
 
   constructor(
     private route: ActivatedRoute,
@@ -42,12 +43,13 @@ export class EventPage implements OnInit {
           }
         });
       });  
+      this._codigoEvento = _codigoEvento;
   }
 
 
   cargarStandsPorEvento(_idConfigurarEventoEncriptado : string)
   {
     this.storage.set('idConfigurarEventoEncriptado', _idConfigurarEventoEncriptado);
-    this.navCtrl.navigateForward('/stands');
+    this.navCtrl.navigateForward(`participants/${this._codigoEvento}`);
   }
 }

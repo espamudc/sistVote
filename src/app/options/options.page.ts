@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalVoterPage} from '../modal-voter/modal-voter.page';
 import { Storage } from '@ionic/storage';
-import { ModalController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-options',
@@ -13,7 +12,7 @@ export class OptionsPage implements OnInit {
   _tiposUsuarios :any = [];
   constructor(
     private storage:Storage,
-    private modalController:ModalController
+    private navCtrl:NavController
   ) { }
 
   ngOnInit() {
@@ -23,13 +22,10 @@ export class OptionsPage implements OnInit {
   }
 
   
-  async cargarModalIngresarCodigoEvento (_idAsignarTipoUsuarioEncriptado : string)
+  async cargarPaginaIngresarCodigoEvento(_idAsignarTipoUsuarioEncriptado : string)
   {      
       this.storage.set('idAsignarTipoUsuario', _idAsignarTipoUsuarioEncriptado);            
-      const modal = await this.modalController.create({
-        component: ModalVoterPage
-      });
-      return await modal.present();
+      this.navCtrl.navigateForward('/search-event');
   }
 
 }

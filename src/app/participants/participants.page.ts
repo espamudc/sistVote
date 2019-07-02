@@ -1,20 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage} from '@ionic/storage';
 import { StandService} from '../../providers/stand-service.service';
+import { ActivatedRoute}  from '@angular/router'
+import{ urlContent } from '../../environments/environment';
 
 @Component({
-  selector: 'app-stands',
-  templateUrl: './stands.page.html',
-  styleUrls: ['./stands.page.scss'],
+  selector: 'app-participants',
+  templateUrl: './participants.page.html',
+  styleUrls: ['./participants.page.scss'],
 })
-export class StandsPage implements OnInit {
-
+export class ParticipantsPage implements OnInit {
+  
   public _validar: boolean = true;
   public _mensaje : string ="";
+  public _participantes : any [];
+  public _codigoEvento : string;
+  public _urlContent : string;
 
   constructor(
     private storage: Storage,
-    private standService: StandService
+    private standService: StandService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -28,9 +34,11 @@ export class StandsPage implements OnInit {
       }
     );
 
-
+    this._codigoEvento = this.route.snapshot.paramMap.get('codigoEvento');
+    this._urlContent =urlContent;
   }
 
+  
   cargarStands(idAsignarTipoUsuarioEncriptado: string, idConfigurarEventoEncriptado: string)
   {
       this.standService.getStands(idAsignarTipoUsuarioEncriptado,idConfigurarEventoEncriptado).then(data => {
@@ -38,6 +46,7 @@ export class StandsPage implements OnInit {
         this._mensaje = data['_mensaje'];
         if(data['_validar']==true)
         {
+          this._participantes = data['_objeto'];
           console.log(data);
         }
       });

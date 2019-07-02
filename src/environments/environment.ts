@@ -17,3 +17,4 @@ export const environment = {
 
 
 export const url = "http://localhost:21883/api/";
+export const urlContent = "http://localhost:21883";

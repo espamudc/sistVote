@@ -1,8 +1,13 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>INFORMACIÓN GENERAL</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="options"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Información general
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
   <ion-card *ngIf="!_validar; else mostrarEvento">
@@ -18,7 +23,7 @@
         </ion-item>
       </ion-card-header>  
       <ion-card-content>     
-        <ion-text color="dark">
+        <ion-text>
           <p>{{_evento._descripcionConfigurarEvento}}</p>
         </ion-text>
         <ion-chip *ngIf="!_evento._estadoEvento; else dejarVotar" color="danger">
@@ -28,10 +33,10 @@
         <ng-template #dejarVotar>     
           <ion-chip color="success">
             <ion-icon name="checkmark-circle-outline"></ion-icon>
-            <p>{{_evento._descripcionEstadoEvento}}</p>
+            <p class="estado-evento">{{_evento._descripcionEstadoEvento}}</p>
           </ion-chip>   
-          <ion-button (click)="cargarStandsPorEvento(_evento._idConfigurarEventoEncriptado);" expand="block" color="primary" shape="round">
-            <ion-icon slot="icon-only" name="checkbox-outline"></ion-icon>
+          <ion-button (click)="cargarStandsPorEvento(_evento._idConfigurarEventoEncriptado);" expand="block" color="light" shape="round">
+            <ion-icon slot="icon-only" slot="end" name="checkbox-outline"></ion-icon>
              IR A VOTAR
           </ion-button>
         </ng-template>
@@ -45,7 +50,7 @@
           <ion-card-content>
               <ion-item *ngFor="let _votante of _objetoConfigurarActorEvaluador" >
                   <ion-label class="votante">{{_votante._descripcionTipoActorEvaluador}}</ion-label>
-                  <ion-badge color="medium" slot="end">{{_votante._pesoConfigurarTipoActorEvaluador}}%</ion-badge>
+                  <ion-badge color="light" slot="end">{{_votante._pesoConfigurarTipoActorEvaluador}}%</ion-badge>
               </ion-item>
           </ion-card-content>
     </ion-card>
@@ -61,15 +66,15 @@
           </ion-chip>
           <ion-chip color="success">
             <ion-icon name="person"></ion-icon>
-            <ion-label color="medium" >{{_evento._nombresOrganizador}}</ion-label>    
+            <ion-label color="medium">{{_evento._nombresOrganizador}}</ion-label>    
           </ion-chip>
           <ion-chip color="success">
               <ion-icon name="calendar"></ion-icon>
-              <ion-label color="medium" >{{_evento._fechaInicioMostrar}} - {{_evento._fechaFinMostrar}}</ion-label>    
+              <ion-label color="medium">{{_evento._fechaInicioMostrar}} - {{_evento._fechaFinMostrar}}</ion-label>    
           </ion-chip>
           <ion-chip color="success">
             <ion-icon name="time"></ion-icon>
-            <ion-label color="medium" >{{_evento._horaInicioMostrar}} - {{_evento._horaFinMostrar}}</ion-label>    
+            <ion-label color="medium">{{_evento._horaInicioMostrar}} - {{_evento._horaFinMostrar}}</ion-label>    
           </ion-chip>
         </ion-card-content>  
       </ion-card>

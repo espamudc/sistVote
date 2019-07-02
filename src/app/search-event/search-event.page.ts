@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, NavParams, ModalController, NavController } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { EventService } from '../../providers/event-service.service';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 
+
 @Component({
-  selector: 'app-modal-voter',
-  templateUrl: './modal-voter.page.html',
-  styleUrls: ['./modal-voter.page.scss'],
+  selector: 'app-search-event',
+  templateUrl: './search-event.page.html',
+  styleUrls: ['./search-event.page.scss'],
 })
-export class ModalVoterPage implements OnInit {
+export class SearchEventPage implements OnInit {
 
   public _codigoEvento : string ="";
   public _validar: boolean = true;
   public _mensaje : string ="";
 
   constructor(
-    private navparams: NavParams,
-    private modalController:ModalController,
     public eventService:EventService,
     private storage: Storage,
     private navController: NavController,
@@ -25,7 +24,6 @@ export class ModalVoterPage implements OnInit {
   ) { }
 
   ngOnInit() {
-   
   }
 
   buscarEvento()
@@ -51,14 +49,8 @@ export class ModalVoterPage implements OnInit {
   enviarEvento(_codigoEvento)
   { 
     this.navController.navigateForward(`event/${_codigoEvento}`); 
-    this.modalController.dismiss();
   }
-
-  regresarOpciones()
-  { 
-    this.modalController.dismiss();
-  }
-
+  
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -66,6 +58,5 @@ export class ModalVoterPage implements OnInit {
     });
     toast.present();
   }
-
 
 }

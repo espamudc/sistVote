@@ -1,0 +1,17 @@
+<ion-header>   
+    <ion-toolbar>
+        <ion-buttons slot="start">
+        <ion-back-button defaultHref="options"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            Código del evento
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+        <ion-item>
+            <ion-input value="EV10091" placeholder="Ingrese el código" type="text"  [(ngModel)]="_codigoEvento" [ngModelOptions]="{standalone: true}" autofocus></ion-input>   
+        </ion-item>              
+        <ion-button color="light" expand="full" (click)="buscarEvento();" ><ion-icon name="search" slot="end"></ion-icon>BUSCAR EVENTO</ion-button>
+</ion-content>
