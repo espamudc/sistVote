@@ -19,7 +19,7 @@
       <ion-card-header>
         <ion-card-subtitle>ORGANIZADA POR: {{_evento._carreraOrganizadora}}</ion-card-subtitle>
         <ion-item>
-            <ion-card-title>{{_evento._nombreEvento}}</ion-card-title>
+            <ion-card-title> <ion-text >{{_evento._nombreEvento}}</ion-text>  </ion-card-title>
         </ion-item>
       </ion-card-header>  
       <ion-card-content>     
@@ -36,8 +36,8 @@
             <p class="estado-evento">{{_evento._descripcionEstadoEvento}}</p>
           </ion-chip>   
           <ion-button (click)="cargarStandsPorEvento(_evento._idConfigurarEventoEncriptado);" expand="block" color="light" shape="round">
-            <ion-icon slot="icon-only" slot="end" name="checkbox-outline"></ion-icon>
-             IR A VOTAR
+            <ion-icon slot="icon-only" slot="end" name="arrow-dropright-circle"></ion-icon>
+            EVENTO
           </ion-button>
         </ng-template>
       </ion-card-content>
@@ -45,12 +45,12 @@
 
     <ion-card *ngFor="let _evento of _objetoEvento">
         <ion-card-header>
-            <ion-card-subtitle>QUIENES PUEDEN VOTAR</ion-card-subtitle>
+            <ion-card-subtitle>PONDERACIÓN DE VOTOS</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
               <ion-item *ngFor="let _votante of _objetoConfigurarActorEvaluador" >
-                  <ion-label class="votante">{{_votante._descripcionTipoActorEvaluador}}</ion-label>
-                  <ion-badge color="light" slot="end">{{_votante._pesoConfigurarTipoActorEvaluador}}%</ion-badge>
+                  <ion-label class="votante ion-text-wrap">{{_votante._descripcionTipoActorEvaluador}}</ion-label>
+                  <ion-badge style="background-color: black;color:white" slot="end">{{_votante._pesoConfigurarTipoActorEvaluador}}%</ion-badge>
               </ion-item>
           </ion-card-content>
     </ion-card>
