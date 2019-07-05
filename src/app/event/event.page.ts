@@ -47,9 +47,12 @@ export class EventPage implements OnInit {
   }
 
 
-  cargarStandsPorEvento(_idConfigurarEventoEncriptado : string)
+  cargarCategoriasPorEvento(_idConfigurarEventoEncriptado : string)
   {
     this.storage.set('idConfigurarEventoEncriptado', _idConfigurarEventoEncriptado);
-    this.navCtrl.navigateForward(`participants/${this._codigoEvento}`);
+    this.navCtrl.navigateForward(`categories/${this._codigoEvento}`);
   }
+
+
+
 }

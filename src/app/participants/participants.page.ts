@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage} from '@ionic/storage';
-import { StandService} from '../../providers/stand-service.service';
+import { ParticipantsService } from '../../providers/participants.service';
 import { ActivatedRoute}  from '@angular/router'
 import{ urlContent } from '../../environments/environment';
 
@@ -19,17 +19,17 @@ export class ParticipantsPage implements OnInit {
 
   constructor(
     private storage: Storage,
-    private standService: StandService,
+    private participantService: ParticipantsService,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.storage.get('idConfigurarEventoEncriptado').then(
-      (valConfigurarEvento) => 
+    this.storage.get('idAsignarTipoUsuario').then(
+      (valAsignarTipoUsuario) => 
       {
-        this.storage.get('idAsignarTipoUsuario').then((valAsignarTipoUsuario) => 
+        this.storage.get('idAsignarCategoriaConfigurarEvento').then((valAsignarCategoriaConfigurarEvento) => 
         {
-            this.cargarStands(valAsignarTipoUsuario,valConfigurarEvento);
+            this.cargarParticipantes(valAsignarTipoUsuario,valAsignarCategoriaConfigurarEvento);
         });
       }
     );
@@ -39,9 +39,9 @@ export class ParticipantsPage implements OnInit {
   }
 
   
-  cargarStands(idAsignarTipoUsuarioEncriptado: string, idConfigurarEventoEncriptado: string)
+  cargarParticipantes(idAsignarTipoUsuarioEncriptado: string, idAsignarCategoriaConfigurarEventoEncriptado: string)
   {
-      this.standService.getStands(idAsignarTipoUsuarioEncriptado,idConfigurarEventoEncriptado).then(data => {
+      this.participantService.getParticipants(idAsignarTipoUsuarioEncriptado,idAsignarCategoriaConfigurarEventoEncriptado).then(data => {
         this._validar=data['_validar'];
         this._mensaje = data['_mensaje'];
         if(data['_validar']==true)
