@@ -18,7 +18,13 @@
         </ion-card-header>
       
         <ion-card-content>
-            <ion-text>{{participante._descripcionActorEvaluado}}</ion-text>           
+            <ion-card *ngIf="!_validarEspecialista; else eresEspecialista">
+                <ion-button color="success" (click)="mensajeVotoUnico(participante._idConfigurarTipoActorEvaluadoEncriptado);">Votar</ion-button>  
+            </ion-card>
+                  
+            <ng-template #eresEspecialista> 
+                <ion-button color="success">Validar Parámetros</ion-button>  
+           </ng-template>   
         </ion-card-content>
       </ion-card>
 </ion-content>

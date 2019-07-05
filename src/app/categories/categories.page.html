@@ -1,0 +1,18 @@
+<ion-header>   
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="event/{{_codigoEvento}}"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+          Categoría
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div color="light" *ngFor="let categoria of _categorias">
+    <div class="item-contenido" (click)="cargarStandsPorCategoria(categoria._idAsignarCategoriaConfigurarEvento);">
+      <ion-label >  <ion-icon  name="football" slot="start" style="color: #38436D"></ion-icon>&nbsp;&nbsp;{{categoria._descripcionCategoriaActorEvaluado}}</ion-label>
+    </div>
+  </div>
+</ion-content>
