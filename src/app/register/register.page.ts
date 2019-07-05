@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonService } from '../../providers/person.service';
+
 
 @Component({
   selector: 'app-register',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
 
-  constructor() { }
+  tiposIdentificacion:string;
+  tiposexo:string;
+  constructor(public personService:PersonService ) { }
 
   ngOnInit() {
+    this.getTypeIden();
   }
+
+  getTypeIden(){
+
+   this.personService.getTypeIdentification().then(data=>{
+     this.tiposIdentificacion=data['_objetoTipoIdentificacion'];
+     this.tiposexo=data['_objetoSexo'];
+   }).catch(error=>{
+
+   })
+
+  }
+
+
+
 
 }

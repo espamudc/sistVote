@@ -2,14 +2,10 @@
 </ion-header>
 
 <ion-content padding>  
-   
         <img class="logologin" alt="logo"src="../../assets/img/logo.png" > 
-
-        
           <ion-chip *ngIf="!_validar" color="danger">
                 <ion-icon name="close"></ion-icon><ion-label  color="danger" >{{_mensaje}}</ion-label>
           </ion-chip>
-
         <ion-item>
               <ion-label position="floating">Identificación</ion-label>
               <ion-input type="text" value="131165593" [(ngModel)]="objLogin.identificacion" [ngModelOptions]="{standalone: true}" required></ion-input>
@@ -18,9 +14,7 @@
                 <ion-label position="floating">Contraseña</ion-label>
                 <ion-input type="text" value="Espam" [(ngModel)]="objLogin.contrasena" [ngModelOptions]="{standalone: true}" type="password" required></ion-input>
         </ion-item>
-
         <ion-button (click)="postLoginFormulario();"  expand="full" color="light"><ion-icon name="log-in" slot="end"></ion-icon>Ingresar</ion-button>
-              
         <ion-grid>
           <ion-row >
             <ion-col size="1">
@@ -35,6 +29,4 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-
-        
 </ion-content>
