@@ -11,17 +11,14 @@
 
 <ion-content >
       <div color="light" *ngFor="let tipoUsuario of _tiposUsuarios">
-        <ion-item lines="none" color="secondary" *ngIf="tipoUsuario._identificadorTipoUsuario==1" href="#"  class="item-contenido" >
-          <ion-icon class="pdbasic" name="key" slot="start"></ion-icon>
-          <ion-label class="pdbasic" >{{tipoUsuario._descripcionTipoUsuario}}</ion-label>
-        </ion-item>
-        <ion-item lines="none" color="secondary" *ngIf="tipoUsuario._identificadorTipoUsuario==2" href="#"  class="item-contenido">
-          <ion-icon class="pdbasic" name="cube" slot="start"></ion-icon>
-          <ion-label class="pdbasic">{{tipoUsuario._descripcionTipoUsuario}}</ion-label>
-        </ion-item>
-        <ion-item lines="none"  color="secondary" *ngIf="tipoUsuario._identificadorTipoUsuario==3"  (click)="cargarPaginaIngresarCodigoEvento(tipoUsuario._idAsignarTipoUsuarioEncriptado);" class="item-contenido" >
-          <ion-icon  class="pdbasic" name="thumbs-up" slot="start"></ion-icon>
-          <ion-label class="pdbasic">{{tipoUsuario._descripcionTipoUsuario}}</ion-label>
-        </ion-item>
+        <div *ngIf="tipoUsuario._identificadorTipoUsuario==1" class="item-contenido">
+          <ion-label >  <ion-icon  name="person" slot="start" style="color: #38436D"></ion-icon>&nbsp;&nbsp;{{tipoUsuario._descripcionTipoUsuario}}</ion-label>
+        </div>
+        <div *ngIf="tipoUsuario._identificadorTipoUsuario==2" class="item-contenido">
+          <ion-label >  <ion-icon  name="cube" slot="start" style="color: #38436D"></ion-icon>&nbsp;&nbsp;{{tipoUsuario._descripcionTipoUsuario}}</ion-label>
+        </div>
+        <div *ngIf="tipoUsuario._identificadorTipoUsuario==3" class="item-contenido" (click)="cargarPaginaIngresarCodigoEvento(tipoUsuario._idAsignarTipoUsuarioEncriptado);" >
+          <ion-label >  <ion-icon  name="thumbs-up" slot="start" style="color: #38436D"></ion-icon>&nbsp;&nbsp;{{tipoUsuario._descripcionTipoUsuario}}</ion-label>
+        </div>
       </div>
 </ion-content>
