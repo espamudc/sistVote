@@ -4,57 +4,42 @@
       <ion-back-button defaultHref="login"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Registrar Usuario
+      Registrar usuario
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<!-- -->
 <ion-content padding>
-    <ion-grid>
+    <ion-grid> 
         <ion-row >
           <ion-col size="6">
-    
               <ion-label position="floating">Tipo de identificación</ion-label>
-              <ion-select okText="Ok" cancelText="Cancelar" >
-                <ion-select-option *ngFor="let item of tiposIdentificacion"  value="item._idTipoIdentificacionEncriptado" selected>{{item._descripcion}}</ion-select-option>
+              <ion-select (ionChange)="selectDisable()" placeholder="Seleccione..." okText="Ok" cancelText="Cancelar" [(ngModel)]="dataRegister._idTipoIdentificacionEncriptado" multiple="false" required>
+                <ion-select-option  *ngFor="let item of tiposIdentificacion"  value="{{item._idTipoIdentificacionEncriptado}}">{{item._descripcion}}</ion-select-option>
               </ion-select>
-     
       </ion-col>
       <ion-col size="6">
-          <ion-input type="text"  required style="background-color: #FFFFD9; text-align: center"></ion-input>
+          <ion-input type="text" disabled="{{isDisabled}}" [(ngModel)]="dataRegister.identificacion" required style="background-color: #FFFFD9; text-align: center"></ion-input>
       </ion-col>
     </ion-row>
   </ion-grid>
-
   <ion-item>
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="text"  required></ion-input>
+      <ion-input type="text" [(ngModel)]="dataRegister.primerNombre" required></ion-input>
   </ion-item>
   <ion-item>
       <ion-label position="floating">Apellido</ion-label>
-      <ion-input type="text"  required></ion-input>
+      <ion-input type="text"  [(ngModel)]="dataRegister.primerApellido" required></ion-input>
   </ion-item>
   <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="text"  required></ion-input>
+      <ion-input type="text"[(ngModel)]="dataRegister.contrasena"  required></ion-input>
   </ion-item>
   <ion-item>
       <ion-label position="floating">Repetir contraseña</ion-label>
-      <ion-input type="text"  required></ion-input>
+      <ion-input type="text" [(ngModel)]="dataRegister.repetirContrasena" required></ion-input>
   </ion-item>
-        <!-- <ion-item>
-            <ion-radio-group>
-            <ion-list-header>
-              <ion-label>Sexo</ion-label>
-            </ion-list-header>
-            <ion-item *ngFor="let item of tiposexo" style="font-size: 12px;">
-              <ion-label>{{item._descripcion}}</ion-label>
-              <ion-radio  slot="start" value="{{item._idSexoEncriptado}}"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
-        </ion-item> -->
-
-
-        <ion-button  expand="full" color="light" style="margin-top: 25px;"><ion-icon name="checkmark-circle" slot="end"></ion-icon>Regístrese</ion-button>
+        <ion-button (click)="registerInvitado()" expand="full" color="light" style="margin-top: 25px;"><ion-icon name="checkmark-circle" slot="end"></ion-icon>Regístrese</ion-button>
         <ion-grid>
           <ion-row >
             <ion-col size="12" style="text-align: center">

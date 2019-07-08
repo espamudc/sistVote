@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonService } from '../../providers/person.service';
-
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -11,24 +11,41 @@ export class RegisterPage implements OnInit {
 
   tiposIdentificacion:string;
   tiposexo:string;
-  constructor(public personService:PersonService ) { }
+  dataRegister:any=[];
+  isDisabled: boolean=true;
+  constructor(public personService:PersonService,
+              private toastController:ToastController ) { }
 
   ngOnInit() {
     this.getTypeIden();
   }
 
   getTypeIden(){
-
    this.personService.getTypeIdentification().then(data=>{
      this.tiposIdentificacion=data['_objetoTipoIdentificacion'];
      this.tiposexo=data['_objetoSexo'];
    }).catch(error=>{
-
+    this.presentToast(error);
    })
-
   }
 
-
+  registerInvitado(){
+    this.personService.postInsertInvitado(this.dataRegister).then(resp=>{
+      this.presentToast(resp["_mensaje"]);
+    }).catch(error=>{
+      this.presentToast(error);
+    })
+  }
+  selectDisable(){
+    this.isDisabled=false;
+  }
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000,
+    });
+    toast.present();
+  }
 
 
 }
