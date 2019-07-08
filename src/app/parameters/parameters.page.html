@@ -1,0 +1,30 @@
+<ion-header>   
+    <ion-toolbar>
+        <ion-buttons slot="start">
+        <ion-back-button defaultHref="participants/{{_codigoEvento}}"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            Parámetros de votación
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let parametro of _parametros">
+      <ion-item>        
+        <ion-list>
+          <ion-radio-group>
+            <ion-list-header>
+              <ion-label>{{parametro._descripcionParametro}}</ion-label>
+            </ion-list-header>
+        
+            <ion-item *ngFor="let numero of _numerosCalificacion" >
+              <ion-label>{{numero[1]}}</ion-label>
+              <ion-radio slot="start" value="{{numero[0]}}"></ion-radio>
+            </ion-item>                
+          </ion-radio-group>
+        </ion-list>
+      </ion-item>
+      <ion-button (click)="votoPorParametro(parametro._idConfigurarTipoActorEvaluadoEncriptado,parametro.idAsignarParametrosCategoriaEncriptado);">VOTAR</ion-button>
+    </div>
+</ion-content>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage} from '@ionic/storage';
 import { ParticipantsService } from '../../providers/participants.service';
-import { ActivatedRoute}  from '@angular/router'
+import { ActivatedRoute}  from '@angular/router';
 import{ urlContent } from '../../environments/environment';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { VotoService } from '../../providers/voto.service';
 
 @Component({
@@ -18,15 +18,18 @@ export class ParticipantsPage implements OnInit {
   public _participantes : any [];
   public _codigoEvento : string;
   public _urlContent : string;
-  public _validarEspecialista : boolean=false;
+  public _validarEspecialista : boolean = false;
   public _idAsignarTipoUsuarioEncriptado : string ="";
+  public _estadoVotoGeneral : boolean = false;
 
   constructor(
     private storage: Storage,
     private participantService: ParticipantsService,
     private route: ActivatedRoute,
     private alertController: AlertController,
-    private voteService : VotoService
+    private voteService : VotoService,
+    private toastController:ToastController,
+    private navCtrl : NavController
   ) { }
 
   ngOnInit() {
@@ -55,6 +58,7 @@ export class ParticipantsPage implements OnInit {
         {
           this._participantes = data['_objeto'];
           this._validarEspecialista = data['_validarEspecialista'];
+          this._estadoVotoGeneral = data['_estadoVotoGeneral'];
         }
       });
   }
@@ -73,12 +77,12 @@ export class ParticipantsPage implements OnInit {
         }, {
           text: 'Votar',
           handler: () => {
-             this.votarVotoUnico(idConfigurarTipoActorEvaluadoEncriptado);
+              this.votarVotoUnico(idConfigurarTipoActorEvaluadoEncriptado);           
+              
           }
         }
       ]
     });
-
     await alert.present();
   }
 
@@ -86,13 +90,33 @@ export class ParticipantsPage implements OnInit {
   votarVotoUnico(idConfigurarTipoActorEvaluadoEncriptado: string)
   {
     this.voteService.postSingleVote(this._idAsignarTipoUsuarioEncriptado,idConfigurarTipoActorEvaluadoEncriptado).then(data =>
-      {
-       if(data['_validar']==true){
-          console.log(data);
-       }       
+      {        
+        if(data['_validar']==false)
+        {
+          this.presentToast(data['_mensaje']);
+        }
+        else
+        {
+          window.location.reload();
+        }
         this._validar = data['_validar'];
         this._mensaje=data['_mensaje'];   
       });
+  }
+
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000,
+    });
+    toast.present();
+  }
+
+
+  cargarPaginaVotarVotoParametros(idConfigurarTipoActorEvaluadoEncriptado: string)
+  {
+    this.storage.set('idConfigurarTipoActorEvaluadoEncriptado', idConfigurarTipoActorEvaluadoEncriptado);            
+    this.navCtrl.navigateForward(`parameters/${this._codigoEvento}`);
   }
 
 }

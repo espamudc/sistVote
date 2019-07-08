@@ -21,13 +21,8 @@ const routes: Routes = [
   { path: 'options', loadChildren: './options/options.module#OptionsPageModule' },
   { path: 'search-event', loadChildren: './search-event/search-event.module#SearchEventPageModule' },
   { path: 'participants/:codigoEvento', loadChildren: './participants/participants.module#ParticipantsPageModule' },
-  { path: 'categories/:codigoEvento', loadChildren: './categories/categories.module#CategoriesPageModule' }
-
-
-
-
-
-
+  { path: 'categories/:codigoEvento', loadChildren: './categories/categories.module#CategoriesPageModule' },
+  { path: 'parameters/:codigoEvento', loadChildren: './parameters/parameters.module#ParametersPageModule' }
 
 
 ];

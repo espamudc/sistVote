@@ -24,4 +24,18 @@ export class ParticipantsService {
       });
     });
   }
+
+
+
+  getParametersForParticipants(idAsignarTipoUsuarioEncriptado: string, idConfigurarTipoActorEvaluadoEncriptado: string)
+  {
+    const urlApi = url+`VotoParametrizado/Consultarparametroscategoria?idAsignarTipoUsuarioEncriptado=${idAsignarTipoUsuarioEncriptado}&idConfigurarTipoActorEvaluadoEncriptado=${idConfigurarTipoActorEvaluadoEncriptado}`;
+    return new Promise(resolve => {
+      this.http.get(urlApi).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 }
