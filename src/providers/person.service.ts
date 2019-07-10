@@ -37,6 +37,7 @@ export class PersonService {
       .set('primerApellido', data.primerApellido)
       .set('contrasena', data.contrasena)
       .set('repetirContrasena', data.repetirContrasena);
+      
       const urlApi = url+`usuario/ingresarusuarioinvitado`;
       return new Promise((resolve, reject) => {
         this.http.post(urlApi,body,this.httpOptions).subscribe(data => {

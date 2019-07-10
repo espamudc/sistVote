@@ -1,7 +1,7 @@
-<ion-header>   
+<ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-        <ion-back-button defaultHref="categories/{{_codigoEvento}}"></ion-back-button>
+            <ion-back-button defaultHref="categories/{{_codigoEvento}}"></ion-back-button>
         </ion-buttons>
         <ion-title>
             Participantes
@@ -10,38 +10,43 @@
 </ion-header>
 
 <ion-content>
-    <ion-chip color="success" *ngIf="!_validarEspecialista && _estadoVotoGeneral">
-        <ion-label ><ion-icon name="checkmark-circle-outline"></ion-icon> Su voto ya fue registrado en esta categoría</ion-label>
-    </ion-chip>
+    <div color="success" *ngIf="!_validarEspecialista && _estadoVotoGeneral" style="padding: 5px; background-color:#7CCF87;  text-align: center">
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Usted ya votó en esta categoría
+    </div>
     <ion-card *ngFor="let participante of _participantes" color="light">
-        <ion-card-header>    
-           
-                <label style="font-size: 16px; font-weight: bold">{{participante._descripcionTipoActorEvaluado }} {{participante._numeroActorEvaluado}}</label>
-            
-            
+        <ion-card-header>
+            <label style="font-size: 16px; font-weight: bold">{{participante._descripcionTipoActorEvaluado }}
+                {{participante._numeroActorEvaluado}}</label>
         </ion-card-header>
-      
         <ion-card-content>
-                <ion-row>
-                        <ion-col size="3">
-                                <img  src="{{_urlContent}}{{participante._rutaFotoConfigurarTipoActorEvaluado}}"/>
-                        </ion-col>
-                        <ion-col>
-                                <label class="texto-card">{{participante._actorEvaluado}}</label>
-                        </ion-col>
-                      </ion-row>
-
-
+            <ion-row>
+                <ion-col size="3">
+                    <img src="{{_urlContent}}{{participante._rutaFotoConfigurarTipoActorEvaluado}}" />
+                </ion-col>
+                <ion-col>
+                    <label class="texto-card">{{participante._actorEvaluado}}</label>
+                </ion-col>
+            </ion-row>
             <div *ngIf="!_validarEspecialista; else eresEspecialista">
-                <ion-chip color="success" *ngIf="participante._estadoVoto">
-                    <ion-label ><ion-icon name="checkmark-circle-outline"></ion-icon>Voto registrado</ion-label>
+                <div style="text-align: right">
+                <ion-chip color="primary" *ngIf="participante._estadoVoto">
+                    <ion-label>
+                            <ion-icon name="thumbs-up"></ion-icon>&nbsp;Usted apoyó a este estand
+                    </ion-label>
                 </ion-chip>
-                <ion-button  expand="full" color="medium" *ngIf="!_estadoVotoGeneral" (click)="mensajeVotoUnico(participante._idConfigurarTipoActorEvaluadoEncriptado);"><ion-icon slot="end" name="play"></ion-icon>VOTAR</ion-button>  
             </div>
-                  
-            <ng-template #eresEspecialista> 
-                <ion-button  expand="full" color="medium" (click)="cargarPaginaVotarVotoParametros(participante._idConfigurarTipoActorEvaluadoEncriptado);" ><ion-icon slot="end"  name="play"></ion-icon>CALIFICAR</ion-button>  
-           </ng-template>   
+                <ion-button expand="full" color="medium" *ngIf="!_estadoVotoGeneral"
+                    (click)="mensajeVotoUnico(participante._idConfigurarTipoActorEvaluadoEncriptado);">
+                    <ion-icon slot="end" name="play"></ion-icon>VOTAR
+                </ion-button>
+            </div>
+
+            <ng-template #eresEspecialista>
+                <ion-button expand="full" color="medium"
+                    (click)="cargarPaginaVotarVotoParametros(participante._idConfigurarTipoActorEvaluadoEncriptado);">
+                    <ion-icon slot="end" name="play"></ion-icon>CALIFICAR
+                </ion-button>
+            </ng-template>
         </ion-card-content>
-      </ion-card>
+    </ion-card>
 </ion-content>

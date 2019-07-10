@@ -65,8 +65,8 @@ export class ParticipantsPage implements OnInit {
 
   async mensajeVotoUnico(idConfigurarTipoActorEvaluadoEncriptado : string) {
     const alert = await this.alertController.create({
-      header: 'Importante!',
-      message: 'Solo se puede <strong>votar</strong> por un stand en esta categoría!!!',
+      header: '¿Estás seguro que deseas votar?',
+      message: '<strong>RECUERDA</strong> solo puedes votar por un stand en esta categoría!!!',
       buttons: [
         {
           text: 'Cancelar',

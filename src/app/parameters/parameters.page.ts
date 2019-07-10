@@ -27,7 +27,7 @@ export class ParametersPage implements OnInit {
   public idParametro:any;
   public idActorEvaluado:any;
   public contador:number=0;
-
+  public colorCheck : any= ["danger","warning","primary","success"];
   constructor(
     private storage: Storage,
     private route: ActivatedRoute,
@@ -39,7 +39,6 @@ export class ParametersPage implements OnInit {
   ngOnInit() {
     this._codigoEvento = this.route.snapshot.paramMap.get('codigoEvento');
     this.cargarParametros();
-    
   }
 
   cargarParametros()
