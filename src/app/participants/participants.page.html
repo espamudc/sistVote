@@ -1,7 +1,7 @@
 <ion-header>   
     <ion-toolbar>
         <ion-buttons slot="start">
-        <ion-back-button defaultHref="event/{{_codigoEvento}}"></ion-back-button>
+        <ion-back-button defaultHref="categories/{{_codigoEvento}}"></ion-back-button>
         </ion-buttons>
         <ion-title>
             Participantes
@@ -14,22 +14,33 @@
         <ion-label ><ion-icon name="checkmark-circle-outline"></ion-icon> Su voto ya fue registrado en esta categoría</ion-label>
     </ion-chip>
     <ion-card *ngFor="let participante of _participantes" color="light">
-        <ion-card-header>            
-            <img src="{{_urlContent}}{{participante._rutaFotoConfigurarTipoActorEvaluado}}"/>
-            <ion-card-subtitle>{{participante._descripcionTipoActorEvaluado }} {{participante._numeroActorEvaluado}}</ion-card-subtitle>
-            <ion-card-title class="texto-card">{{participante._actorEvaluado}}</ion-card-title>
+        <ion-card-header>    
+           
+                <label style="font-size: 16px; font-weight: bold">{{participante._descripcionTipoActorEvaluado }} {{participante._numeroActorEvaluado}}</label>
+            
+            
         </ion-card-header>
       
         <ion-card-content>
+                <ion-row>
+                        <ion-col size="3">
+                                <img  src="{{_urlContent}}{{participante._rutaFotoConfigurarTipoActorEvaluado}}"/>
+                        </ion-col>
+                        <ion-col>
+                                <label class="texto-card">{{participante._actorEvaluado}}</label>
+                        </ion-col>
+                      </ion-row>
+
+
             <div *ngIf="!_validarEspecialista; else eresEspecialista">
                 <ion-chip color="success" *ngIf="participante._estadoVoto">
                     <ion-label ><ion-icon name="checkmark-circle-outline"></ion-icon>Voto registrado</ion-label>
                 </ion-chip>
-                <ion-button  *ngIf="!_estadoVotoGeneral" color="success" (click)="mensajeVotoUnico(participante._idConfigurarTipoActorEvaluadoEncriptado);">Votar</ion-button>  
+                <ion-button  expand="full" color="medium" *ngIf="!_estadoVotoGeneral" (click)="mensajeVotoUnico(participante._idConfigurarTipoActorEvaluadoEncriptado);"><ion-icon slot="end" name="play"></ion-icon>VOTAR</ion-button>  
             </div>
                   
             <ng-template #eresEspecialista> 
-                <ion-button (click)="cargarPaginaVotarVotoParametros(participante._idConfigurarTipoActorEvaluadoEncriptado);" color="success">Validar Parámetros</ion-button>  
+                <ion-button  expand="full" color="medium" (click)="cargarPaginaVotarVotoParametros(participante._idConfigurarTipoActorEvaluadoEncriptado);" ><ion-icon slot="end"  name="play"></ion-icon>CALIFICAR</ion-button>  
            </ng-template>   
         </ion-card-content>
       </ion-card>

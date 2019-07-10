@@ -9,22 +9,51 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div *ngFor="let parametro of _parametros">
-      <ion-item>        
-        <ion-list>
-          <ion-radio-group>
-            <ion-list-header>
-              <ion-label>{{parametro._descripcionParametro}}</ion-label>
-            </ion-list-header>
-        
-            <ion-item *ngFor="let numero of _numerosCalificacion" >
-              <ion-label>{{numero[1]}}</ion-label>
-              <ion-radio slot="start" value="{{numero[0]}}"></ion-radio>
-            </ion-item>                
-          </ion-radio-group>
-        </ion-list>
-      </ion-item>
-      <ion-button (click)="votoPorParametro(parametro._idConfigurarTipoActorEvaluadoEncriptado,parametro.idAsignarParametrosCategoriaEncriptado);">VOTAR</ion-button>
-    </div>
+<ion-content padding>
+  <ion-card  *ngFor="let parametro of _parametros">
+
+      <ion-toolbar>
+          <ion-title style="font-size: 16px;"><ion-icon name="pricetag"></ion-icon>&nbsp;&nbsp;{{parametro._descripcionParametro}}</ion-title>
+        </ion-toolbar>
+
+
+        <div *ngIf="!parametro._estadoVoto; else yaVoto;"  style="margin: 8px 8px;" >            
+            <ion-item color="light">        
+              <ion-list color="light" no-padding>
+                <ion-radio-group color="light"> 
+                  <ion-item  color="light" *ngFor="let numero of validar(parametro._idAsignarParametrosCategoriaEncriptado)"  >
+                    <ion-label >{{numero[2]}}</ion-label>
+                    <ion-radio color="success" slot="start" (click)="guardarValor(numero[1],parametro._idAsignarParametrosCategoriaEncriptado,parametro._idConfigurarTipoActorEvaluadoEncriptado)"></ion-radio>
+                  </ion-item>                 
+                </ion-radio-group>
+              </ion-list>     
+            </ion-item>
+            <ion-button  expand="block" color="medium" (click)="votoPorParametro();">VOTAR</ion-button>
+          </div>
+            
+
+        <ng-template #esperandoVotar >         
+              <ion-chip color="warning">
+                  <ion-icon name="information-circle-outline"></ion-icon>
+                  <ion-label>Vote en la categoría de arriba, para poder continuar.</ion-label>
+            </ion-chip>
+        </ng-template>
+
+        <ng-template #yaVoto>         
+          <ion-chip color="success">
+                <ion-icon name="thumbs-up"></ion-icon>
+                <ion-label>Ya ha <b> votado </b>en esta categoría</ion-label>
+          </ion-chip>
+          <ion-chip color="medium">
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <ion-label>El rango de votación es desde <b>{{parametro._rangoMinimo}}</b>  hasta <b>{{parametro._rangoMaximo}}</b> </ion-label>
+        </ion-chip>
+          <ion-chip color="secondary">
+              <ion-icon name="star"></ion-icon>
+              <ion-label>Su voto fue de <b>{{parametro._descripcionEstadoVoto}}</b> punto(s)</ion-label>
+        </ion-chip>
+      </ng-template>
+ 
+  
+    </ion-card >
 </ion-content>

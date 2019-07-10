@@ -49,10 +49,7 @@ export class LoginPage implements OnInit {
         this._validar = data['_validar'];
         this._mensaje=data['_mensaje'];   
       });
-  } 
-
-
- 
+  }  
 
 }
 
