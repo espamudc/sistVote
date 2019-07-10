@@ -56,7 +56,6 @@ export class ParametersPage implements OnInit {
             {
               this._parametros = data['_objeto'];      
               this.definirParametros();
-              console.log(this._parametros, this._parametrosDetalles)
             }
           });
         });
