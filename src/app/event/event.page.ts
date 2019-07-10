@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Storage} from '@ionic/storage';
-import { NavController } from '@ionic/angular';
+import { NavController,MenuController } from '@ionic/angular';
 import { EventService } from '../../providers/event-service.service';
 
 @Component({
@@ -21,7 +21,8 @@ export class EventPage implements OnInit {
     private route: ActivatedRoute,
     private storage: Storage,
     private eventService: EventService,
-    private navCtrl : NavController
+    private navCtrl : NavController,
+    public menuCtrl: MenuController,
   ) { }
 
   ngOnInit() {
@@ -54,5 +55,7 @@ export class EventPage implements OnInit {
   }
 
 
-
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+  }
 }

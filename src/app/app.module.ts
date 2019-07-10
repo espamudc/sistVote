@@ -13,14 +13,14 @@ import { LoginService } from '../providers/login-service.service';
 import { HttpClientModule  } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { ModalVoterPageModule } from './modal-voter/modal-voter.module';
-import { OrderbyPipe } from '../app/pipes/orderby.pipe';
+
 
 
 
 enableProdMode();
 
 @NgModule({
-  declarations: [AppComponent, OrderbyPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     HttpClientModule,

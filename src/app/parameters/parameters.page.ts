@@ -3,7 +3,7 @@ import { Storage} from '@ionic/storage';
 import { ActivatedRoute}  from '@angular/router';
 import { ParticipantsService } from '../../providers/participants.service';
 import { VotoService } from '../../providers/voto.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController,MenuController } from '@ionic/angular';
 
 
 @Component({
@@ -33,7 +33,8 @@ export class ParametersPage implements OnInit {
     private route: ActivatedRoute,
     private participantService: ParticipantsService,
     private votoService: VotoService,
-    private toastController : ToastController
+    private toastController : ToastController,
+    public menuCtrl: MenuController,
   ) { }
 
   ngOnInit() {
@@ -107,6 +108,9 @@ export class ParametersPage implements OnInit {
       });
     });
     return _array;
+  }
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
   }
 
   votoPorParametro()

@@ -1,11 +1,16 @@
 <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="options"></ion-back-button>
+        <ion-back-button slot="start" defaultHref="options"></ion-back-button>
       </ion-buttons>
       <ion-title>
         Información general
       </ion-title>
+      <ion-buttons slot="end">
+          <ion-button routerLink="/login" >
+            <ion-icon  color="danger" name="md-log-out"></ion-icon>
+          </ion-button>
+        </ion-buttons>
     </ion-toolbar>
   </ion-header>
 

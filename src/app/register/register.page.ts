@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonService } from '../../providers/person.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController,MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -14,10 +14,15 @@ export class RegisterPage implements OnInit {
   dataRegister:any=[];
   isDisabled: boolean=true;
   constructor(public personService:PersonService,
-              private toastController:ToastController ) { }
+              private toastController:ToastController,
+              public menuCtrl: MenuController,
+ ) { }
 
   ngOnInit() {
     this.getTypeIden();
+  }
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
   }
 
   getTypeIden(){

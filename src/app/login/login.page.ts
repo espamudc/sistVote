@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController,MenuController } from '@ionic/angular';
 import { LoginService } from '../../providers/login-service.service';
 import { Storage } from '@ionic/storage';
 
@@ -19,7 +19,8 @@ export class LoginPage implements OnInit {
     public navCtrl: NavController,
     public loginService:LoginService,
     private storage: Storage,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public menuCtrl: MenuController,
     ) { }
 
 
@@ -31,17 +32,20 @@ export class LoginPage implements OnInit {
   ngOnInit() {
 
   }
-
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+    this.storage.remove('idTiposUsuarios');
+    this.storage.remove('idAsignarTipoUsuario');
+    this.storage.remove('idConfigurarEventoEncriptado');
+  }
 
   
   postLoginFormulario()
   {
     var _objLogin = this.objLogin;
-debugger
     this.loginService.postLogin(_objLogin.identificacion,_objLogin.contrasena)
     .then(data =>
       {
-        debugger
        if(data['_validar']==true){
         this._tiposUsuarios = data['_objeto'][0]._objetoAsignarTipoUsuario;
         this.storage.set('idTiposUsuarios', this._tiposUsuarios);
@@ -50,7 +54,6 @@ debugger
         this._validar = data['_validar'];
         this._mensaje=data['_mensaje'];   
       }).catch(erro=>{
-        debugger
           console.log(erro);
       });
   }  

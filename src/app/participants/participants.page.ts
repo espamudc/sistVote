@@ -3,7 +3,7 @@ import { Storage} from '@ionic/storage';
 import { ParticipantsService } from '../../providers/participants.service';
 import { ActivatedRoute}  from '@angular/router';
 import{ urlContent } from '../../environments/environment';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController,MenuController } from '@ionic/angular';
 import { VotoService } from '../../providers/voto.service';
 
 @Component({
@@ -29,7 +29,8 @@ export class ParticipantsPage implements OnInit {
     private alertController: AlertController,
     private voteService : VotoService,
     private toastController:ToastController,
-    private navCtrl : NavController
+    private navCtrl : NavController,
+    public menuCtrl: MenuController,
   ) { }
 
   ngOnInit() {
@@ -86,6 +87,9 @@ export class ParticipantsPage implements OnInit {
     await alert.present();
   }
 
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+  }
 
   votarVotoUnico(idConfigurarTipoActorEvaluadoEncriptado: string)
   {
