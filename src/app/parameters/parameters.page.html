@@ -12,11 +12,13 @@
 <ion-content padding>
   <ion-card  *ngFor="let parametro of _parametros">
       <ion-toolbar>
+        <div style="margin-top:10px;">
           <ion-text style="font-size: 16px; margin-left: 12px;"><ion-icon name="pricetag"></ion-icon>&nbsp;&nbsp;{{parametro._descripcionParametro}}</ion-text>
-          <div style="background-color: lightgrey; font-size: 14px; padding: 5px; border-radius: 5px; ">
+          <div class="csInfo">
               <ion-icon name="information-circle-outline"></ion-icon>
-              <ion-label>El rango de votación es desde <b>{{parametro._rangoMinimo}}</b>  hasta <b>{{parametro._rangoMaximo}}</b> </ion-label>
+              <ion-label>&nbsp;El rango de votación es desde <b>{{parametro._rangoMinimo}}</b>  hasta <b>{{parametro._rangoMaximo}}</b> </ion-label>
           </div>
+        </div>
         </ion-toolbar>
         <div *ngIf="!parametro._estadoVoto; else yaVoto;"  style="margin: 8px 8px" >   
                 <ion-radio-group> 
@@ -40,10 +42,10 @@
                 <ion-icon name="thumbs-up"></ion-icon>
                 <ion-label>Voto registrado <b> Correctamente </b></ion-label>
           </ion-chip>
-          <ion-chip color="medium">
+          <!-- <ion-chip color="medium">
               <ion-icon name="information-circle-outline"></ion-icon>
               <ion-label>El rango de votación es desde <b>{{parametro._rangoMinimo}}</b>  hasta <b>{{parametro._rangoMaximo}}</b> </ion-label>
-         </ion-chip>
+         </ion-chip> -->
           <ion-chip color="secondary">
               <ion-icon name="star"></ion-icon>
               <ion-label>Su voto fue de <b>{{parametro._descripcionEstadoVoto}}</b> punto(s)</ion-label>

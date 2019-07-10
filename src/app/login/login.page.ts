@@ -37,10 +37,11 @@ export class LoginPage implements OnInit {
   postLoginFormulario()
   {
     var _objLogin = this.objLogin;
-
+debugger
     this.loginService.postLogin(_objLogin.identificacion,_objLogin.contrasena)
     .then(data =>
       {
+        debugger
        if(data['_validar']==true){
         this._tiposUsuarios = data['_objeto'][0]._objetoAsignarTipoUsuario;
         this.storage.set('idTiposUsuarios', this._tiposUsuarios);
@@ -48,6 +49,9 @@ export class LoginPage implements OnInit {
        }       
         this._validar = data['_validar'];
         this._mensaje=data['_mensaje'];   
+      }).catch(erro=>{
+        debugger
+          console.log(erro);
       });
   }  
 

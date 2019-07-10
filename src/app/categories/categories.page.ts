@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Storage} from '@ionic/storage';
-import { NavController } from '@ionic/angular';
+import { NavController, MenuController } from '@ionic/angular';
 import { CategoryService } from '../../providers/category-service.service';
 
 @Component({
@@ -23,7 +23,8 @@ export class CategoriesPage implements OnInit {
     private route: ActivatedRoute,
     private storage: Storage,
     private categoryService: CategoryService,
-    private navCtrl : NavController
+    private navCtrl : NavController,
+    public menuCtrl: MenuController,
   ) { }
 
 
@@ -58,5 +59,7 @@ export class CategoriesPage implements OnInit {
     this.storage.set('idAsignarCategoriaConfigurarEvento', idAsignarCategoriaConfigurarEvento);
     this.navCtrl.navigateForward(`participants/${this._codigoEvento}`);
   }
-
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+  }
 }
