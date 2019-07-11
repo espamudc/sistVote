@@ -37,6 +37,8 @@ export class LoginPage implements OnInit {
     this.storage.remove('idTiposUsuarios');
     this.storage.remove('idAsignarTipoUsuario');
     this.storage.remove('idConfigurarEventoEncriptado');
+    this.storage.remove('idConfigurarTipoActorEvaluadoEncriptado');
+    this.storage.remove('idAsignarCategoriaConfigurarEvento');
   }
 
   
