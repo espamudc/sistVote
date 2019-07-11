@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController,MenuController } from '@ionic/angular';
 import { LoginService } from '../../providers/login-service.service';
 import { Storage } from '@ionic/storage';
-
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -21,6 +21,7 @@ export class LoginPage implements OnInit {
     private storage: Storage,
     public modalController: ModalController,
     public menuCtrl: MenuController,
+    public loadingController: LoadingController,
     ) { }
 
 
@@ -42,8 +43,17 @@ export class LoginPage implements OnInit {
   }
 
   
-  postLoginFormulario()
+ async postLoginFormulario()
   {
+    
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'Votando...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    loading.present();
+
     var _objLogin = this.objLogin;
     this.loginService.postLogin(_objLogin.identificacion,_objLogin.contrasena)
     .then(data =>
@@ -51,12 +61,15 @@ export class LoginPage implements OnInit {
        if(data['_validar']==true){
         this._tiposUsuarios = data['_objeto'][0]._objetoAsignarTipoUsuario;
         this.storage.set('idTiposUsuarios', this._tiposUsuarios);
+        loading.dismiss();
         this.navCtrl.navigateForward(['/options/']);
        }       
+       loading.dismiss();
         this._validar = data['_validar'];
         this._mensaje=data['_mensaje'];   
       }).catch(erro=>{
           console.log(erro);
+          loading.dismiss();
       });
   }  
 

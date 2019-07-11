@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonService } from '../../providers/person.service';
 import { ToastController,MenuController } from '@ionic/angular';
-
+import { LoadingController } from '@ionic/angular';
+import { Router}  from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -16,6 +17,8 @@ export class RegisterPage implements OnInit {
   constructor(public personService:PersonService,
               private toastController:ToastController,
               public menuCtrl: MenuController,
+              public loadingController: LoadingController,
+              private route: Router,
  ) { }
 
   ngOnInit() {
@@ -34,11 +37,22 @@ export class RegisterPage implements OnInit {
    })
   }
 
-  registerInvitado(){
+  async  registerInvitado(){
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'Votando...',
+      translucent: true,
+      duration: 5000,
+      cssClass: 'custom-class custom-loading'
+    });
+    loading.present();
     this.personService.postInsertInvitado(this.dataRegister).then(resp=>{
       this.presentToast(resp["_mensaje"]);
+      loading.dismiss();
+      this.route.navigate(['/login']);
     }).catch(error=>{
       this.presentToast(error);
+      loading.dismiss();
     })
   }
   selectDisable(){

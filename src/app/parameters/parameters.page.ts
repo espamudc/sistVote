@@ -4,7 +4,7 @@ import { ActivatedRoute}  from '@angular/router';
 import { ParticipantsService } from '../../providers/participants.service';
 import { VotoService } from '../../providers/voto.service';
 import { ToastController,MenuController } from '@ionic/angular';
-
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-parameters',
@@ -35,6 +35,7 @@ export class ParametersPage implements OnInit {
     private votoService: VotoService,
     private toastController : ToastController,
     public menuCtrl: MenuController,
+    public loadingController: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -113,12 +114,20 @@ export class ParametersPage implements OnInit {
     this.menuCtrl.enable(false);
   }
 
-  votoPorParametro()
+ async votoPorParametro()
   {    
+    
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'Votando...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    loading.present();
+
     this.votoService.postParameterizedVote(this._idAsignarTipoUsuario,this.idActorEvaluado,this.idParametro,this.valorVoto)
     .then(data =>
       {
-        
         this._validar = data['_validar'];
         this._mensaje=data['_mensaje'];   
        if(data['_validar']==false)
@@ -126,8 +135,10 @@ export class ParametersPage implements OnInit {
         this.presentToast(this._mensaje);
        }else
        {
-        window.location.reload();
+        this.cargarParametros();
+        loading.dismiss();
        }
+       loading.dismiss();
       });
      
   }
@@ -137,8 +148,6 @@ export class ParametersPage implements OnInit {
     this.idParametro=idParametro;
     this.idActorEvaluado=idActorEvaluado;
   }
-
-
     
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
