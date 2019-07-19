@@ -3,6 +3,7 @@ import { NavController, ModalController,MenuController } from '@ionic/angular';
 import { LoginService } from '../../providers/login-service.service';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
+import { authInfo } from "../../environments/environment";
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -48,7 +49,7 @@ export class LoginPage implements OnInit {
     
     const loading = await this.loadingController.create({
       spinner: 'bubbles',
-      message: 'Votando...',
+      message: 'Iniciando...',
       translucent: true,
       cssClass: 'custom-class custom-loading'
     });
@@ -62,6 +63,7 @@ export class LoginPage implements OnInit {
         this._tiposUsuarios = data['_objeto'][0]._objetoAsignarTipoUsuario;
         this.storage.set('idTiposUsuarios', this._tiposUsuarios);
         loading.dismiss();
+        authInfo.authenticated= true;
         this.navCtrl.navigateForward(['/options/']);
        }       
        loading.dismiss();
