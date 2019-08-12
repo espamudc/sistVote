@@ -16,5 +16,5 @@ export const environment = {
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
 
-export const url = "http://localhost:21883/api/";
-export const urlContent = "http://localhost:21883/";
+export const url = "http://evaluaciondocente.espam.edu.ec/api/";
+export const urlContent = "http://evaluaciondocente.espam.edu.ec/";
