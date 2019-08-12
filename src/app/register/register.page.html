@@ -33,11 +33,11 @@
   </ion-item>
   <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="text"[(ngModel)]="dataRegister.contrasena"  required></ion-input>
+      <ion-input type="password"[(ngModel)]="dataRegister.contrasena"  required></ion-input>
   </ion-item>
   <ion-item>
       <ion-label position="floating">Repetir contraseña</ion-label>
-      <ion-input type="text" [(ngModel)]="dataRegister.repetirContrasena" required></ion-input>
+      <ion-input type="password" [(ngModel)]="dataRegister.repetirContrasena" required></ion-input>
   </ion-item>
         <ion-button (click)="registerInvitado()" expand="full" color="light" style="margin-top: 25px;"><ion-icon name="checkmark-circle" slot="end"></ion-icon>Regístrese</ion-button>
         <ion-grid>

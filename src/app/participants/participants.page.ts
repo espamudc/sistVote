@@ -3,8 +3,9 @@ import { Storage} from '@ionic/storage';
 import { ParticipantsService } from '../../providers/participants.service';
 import { ActivatedRoute}  from '@angular/router';
 import{ urlContent } from '../../environments/environment';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController,MenuController } from '@ionic/angular';
 import { VotoService } from '../../providers/voto.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-participants',
@@ -20,6 +21,7 @@ export class ParticipantsPage implements OnInit {
   public _urlContent : string;
   public _validarEspecialista : boolean = false;
   public _idAsignarTipoUsuarioEncriptado : string ="";
+  public _idAsignarCategoriaConfigurarEvento : string ="";
   public _estadoVotoGeneral : boolean = false;
 
   constructor(
@@ -29,7 +31,9 @@ export class ParticipantsPage implements OnInit {
     private alertController: AlertController,
     private voteService : VotoService,
     private toastController:ToastController,
-    private navCtrl : NavController
+    private navCtrl : NavController,
+    public menuCtrl: MenuController,
+    public loadingController: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -39,7 +43,8 @@ export class ParticipantsPage implements OnInit {
         this._idAsignarTipoUsuarioEncriptado = valAsignarTipoUsuario;
         this.storage.get('idAsignarCategoriaConfigurarEvento').then((valAsignarCategoriaConfigurarEvento) => 
         {
-            this.cargarParticipantes(valAsignarTipoUsuario,valAsignarCategoriaConfigurarEvento);
+          this._idAsignarCategoriaConfigurarEvento = valAsignarCategoriaConfigurarEvento;
+            this.cargarParticipantes();
         });
       }
     );
@@ -49,9 +54,9 @@ export class ParticipantsPage implements OnInit {
   }
 
   
-  cargarParticipantes(idAsignarTipoUsuarioEncriptado: string, idAsignarCategoriaConfigurarEventoEncriptado: string)
+  cargarParticipantes()
   {
-      this.participantService.getParticipants(idAsignarTipoUsuarioEncriptado,idAsignarCategoriaConfigurarEventoEncriptado).then(data => {
+      this.participantService.getParticipants(this._idAsignarTipoUsuarioEncriptado,this._idAsignarCategoriaConfigurarEvento).then(data => {
         this._validar=data['_validar'];
         this._mensaje = data['_mensaje'];
         if(data['_validar']==true)
@@ -86,9 +91,21 @@ export class ParticipantsPage implements OnInit {
     await alert.present();
   }
 
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+  }
 
-  votarVotoUnico(idConfigurarTipoActorEvaluadoEncriptado: string)
+  async votarVotoUnico(idConfigurarTipoActorEvaluadoEncriptado: string)
   {
+    
+      const loading = await this.loadingController.create({
+        spinner: 'bubbles',
+        message: 'Votando...',
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+      loading.present();
+ 
     this.voteService.postSingleVote(this._idAsignarTipoUsuarioEncriptado,idConfigurarTipoActorEvaluadoEncriptado).then(data =>
       {        
         if(data['_validar']==false)
@@ -97,11 +114,15 @@ export class ParticipantsPage implements OnInit {
         }
         else
         {
-          window.location.reload();
+          //window.location.reload();
+          this.cargarParticipantes();
+          loading.dismiss();
         }
         this._validar = data['_validar'];
         this._mensaje=data['_mensaje'];   
       });
+      loading.dismiss();
+
   }
 
   async presentToast(mensaje: string) {

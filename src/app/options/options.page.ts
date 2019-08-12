@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController } from '@ionic/angular';
+import { NavController,MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-options',
@@ -12,7 +12,8 @@ export class OptionsPage implements OnInit {
   _tiposUsuarios :any = [];
   constructor(
     private storage:Storage,
-    private navCtrl:NavController
+    private navCtrl:NavController,
+    public menuCtrl: MenuController,
   ) { }
 
   ngOnInit() {
@@ -26,6 +27,9 @@ export class OptionsPage implements OnInit {
   {      
       this.storage.set('idAsignarTipoUsuario', _idAsignarTipoUsuarioEncriptado);            
       this.navCtrl.navigateForward('/search-event');
+  }
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
   }
 
 }

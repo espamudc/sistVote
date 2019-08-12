@@ -18,3 +18,7 @@ export const environment = {
 
 export const url = "http://evaluaciondocente.espam.edu.ec/api/";
 export const urlContent = "http://evaluaciondocente.espam.edu.ec/";
+
+export const authInfo = {
+  authenticated: false
+};

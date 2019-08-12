@@ -1,8 +1,10 @@
 <ion-header>   
     <ion-toolbar>
-        <ion-buttons slot="start">
-        <ion-back-button defaultHref="login"></ion-back-button>
-        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button routerLink="/login" >
+              <ion-icon slot="icon-only" color="danger" name="md-log-out"></ion-icon>
+            </ion-button>
+          </ion-buttons>
         <ion-title>
             Tipo de usuario
         </ion-title>

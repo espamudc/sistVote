@@ -62,4 +62,5 @@ export class CategoriesPage implements OnInit {
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
   }
+
 }

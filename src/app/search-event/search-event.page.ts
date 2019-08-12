@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule, NavController } from '@ionic/angular';
 import { EventService } from '../../providers/event-service.service';
 import { Storage } from '@ionic/storage';
-import { ToastController } from '@ionic/angular';
+import { ToastController,MenuController } from '@ionic/angular';
 
 
 @Component({
@@ -20,7 +20,8 @@ export class SearchEventPage implements OnInit {
     public eventService:EventService,
     private storage: Storage,
     private navController: NavController,
-    private toastController:ToastController
+    private toastController:ToastController,
+    public menuCtrl: MenuController,
   ) { }
 
   ngOnInit() {
@@ -43,6 +44,9 @@ export class SearchEventPage implements OnInit {
         }
       });
     });    
+  }
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
   }
 
  
